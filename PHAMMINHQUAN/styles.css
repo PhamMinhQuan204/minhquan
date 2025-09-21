@@ -1,0 +1,89 @@
+@charset "utf-8";
+.body{
+    width: 98%;
+    background-color:rgb(0, 0, 0);
+    
+}
+#header{
+width: 98%;
+margin: 0px 15px ;
+}
+.logo{
+    width: 98%;
+    background-color:black;
+    color:white;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 10px 20px;
+}
+.menu{
+    display:flex;
+    background-color:black;
+    width: 98%;
+}
+.menu a{
+    display:block;
+    padding: 15px 100px;
+    color:rgb(14, 14, 14);
+    text-transform: uppercase;
+    text-decoration: none;
+   
+
+}
+.menu a:hover{
+    color:greenyellow;
+    background-color:white;
+    border-radius: 10px;
+    border-right: solid;
+    border-right-color: white;   
+}
+#main{
+ width: 98%;
+ padding: 0px 15px;  
+}
+.left{
+ float:left;
+ width: 98%;
+ padding: 5px;
+ border: solid;
+ border-right-color: aliceblue;
+}
+.right{
+ float: right;
+ width: 98%;
+ padding: 5px; 
+}
+.right h3{
+ color: aliceblue;
+}
+#sp h1{
+ color: antiquewhite;
+}
+
+.row::after{
+ display: table;
+ clear:both;
+ content: "";
+ padding-right: 5px;
+ margin-right: 5px;
+}
+.column{
+
+ padding: 3px 5px;
+ background-color: beige;
+ border-radius: 15px;
+ padding-right: 5px;
+ margin-right: 5px;
+ padding-right: 5px;
+ margin-right: 5px;
+}
+.column:hover.overplay{transform: scale(1);}
+.column p{
+ color: rgb(84, 29, 194);
+}
+.column b{
+ color: red;
+}
+.column em{
+ color:cornflowerblue;
+}
