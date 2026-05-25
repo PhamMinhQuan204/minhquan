@@ -1,0 +1,160 @@
+<!-- cart.html -->
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Giỏ Hàng</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .pay-box {
+        margin-top: 15px;
+
+        display: flex;
+
+        gap: 10px;
+
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">GIỎ HÀNG</div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Trang Chủ</a></li>
+
+          <li><a href="orders.html">Theo Dõi Đơn</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="cart-page">
+      <h1>SẢN PHẨM ĐÃ THÊM</h1>
+
+      <div id="cart-items"></div>
+    </section>
+
+    <script>
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const cartItems = document.getElementById("cart-items");
+
+      function showCart() {
+        cartItems.innerHTML = "";
+
+        if (cart.length === 0) {
+          cartItems.innerHTML = "<p>Chưa có sản phẩm.</p>";
+        } else {
+          cart.forEach((item, index) => {
+            cartItems.innerHTML += `
+
+            <div class="cart-box">
+
+              <h2>${item.product}</h2>
+
+              <p>${item.price}</p>
+
+              <p><b>Người mua:</b> ${item.customerName}</p>
+
+              <p><b>SĐT:</b> ${item.customerPhone}</p>
+
+              <p><b>Địa chỉ:</b> ${item.customerAddress}</p>
+
+              <p>${item.status}</p>
+
+              <p>${item.time}</p>
+
+              <div class="pay-box">
+
+                <button
+                  class="btn"
+                  onclick="checkoutCOD(${index})">
+
+                  Thanh Toán COD
+
+                </button>
+
+                <button
+                  class="btn"
+                  onclick="checkoutONLINE(${index})">
+
+                  Thanh Toán ONLINE
+
+                </button>
+
+                <button
+                  class="btn"
+                  onclick="deleteItem(${index})">
+
+                  Xóa
+
+                </button>
+
+              </div>
+
+            </div>
+
+            `;
+          });
+        }
+      }
+
+      // DELETE
+      function deleteItem(index) {
+        cart.splice(index, 1);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        showCart();
+      }
+
+      // COD
+      function checkoutCOD(index) {
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        cart[index].status = "Đang giao hàng (COD)";
+
+        orders.push(cart[index]);
+
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        cart.splice(index, 1);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert("Đặt hàng COD thành công");
+
+        showCart();
+      }
+
+      // ONLINE
+      function checkoutONLINE(index) {
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        cart[index].status = "Đã thanh toán ONLINE";
+
+        orders.push(cart[index]);
+
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        cart.splice(index, 1);
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert("Thanh toán ONLINE thành công");
+
+        showCart();
+      }
+
+      showCart();
+    </script>
+  </body>
+</html>

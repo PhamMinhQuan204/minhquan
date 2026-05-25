@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Theo Dõi Đơn</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+
+    <header>
+      <div class="logo">THEO DÕI ĐƠN</div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Trang Chủ</a></li>
+
+          <li><a href="cart.html">Giỏ Hàng</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ORDERS -->
+
+    <section class="cart-page">
+      <h1>ĐƠN HÀNG</h1>
+
+      <div id="order-list"></div>
+    </section>
+
+    <script>
+      // ORDERS
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+
+      // DOM
+      const orderList = document.getElementById("order-list");
+
+      // EMPTY
+      if (orders.length === 0) {
+        orderList.innerHTML = "<p>Chưa có đơn hàng.</p>";
+      } else {
+        // LOOP
+        orders.forEach((item) => {
+          orderList.innerHTML += `
+
+          <div class="cart-box">
+
+            <h2>${item.product}</h2>
+
+            <p>${item.price}</p>
+
+            <p>Người mua: ${item.user}</p>
+
+            <p class="status">${item.status}</p>
+
+            <p>${item.time}</p>
+
+          </div>
+
+          `;
+        });
+      }
+    </script>
+  </body>
+</html>

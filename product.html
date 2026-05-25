@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chi Tiết Sản Phẩm</title>
+
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .product-detail {
+        width: 90%;
+        margin: 130px auto;
+        display: flex;
+        gap: 50px;
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-detail img {
+        width: 450px;
+        border-radius: 20px;
+      }
+
+      .detail-info {
+        flex: 1;
+      }
+
+      .detail-info h1 {
+        font-size: 45px;
+        margin-bottom: 20px;
+      }
+
+      .detail-price {
+        color: red;
+        font-size: 35px;
+        margin-bottom: 20px;
+      }
+
+      .size-box {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+      }
+
+      .size-btn {
+        width: 55px;
+        height: 55px;
+        border: none;
+        border-radius: 10px;
+        background: #111827;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      .size-btn.active {
+        background: orange;
+      }
+
+      .size-btn.out {
+        background: gray;
+        cursor: not-allowed;
+      }
+
+      .stock {
+        margin-bottom: 20px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .in-stock {
+        color: green;
+      }
+
+      .out-stock {
+        color: red;
+      }
+
+      .buy-form input {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+      }
+
+      .buy-btn {
+        width: 100%;
+        padding: 16px;
+        border: none;
+        background: orange;
+        color: white;
+        font-size: 20px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">SPORT SHOP</div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Trang Chủ</a></li>
+
+          <li><a href="cart.html">Giỏ Hàng</a></li>
+
+          <li><a href="orders.html">Đơn Hàng</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="product-detail">
+      <img id="product-image" src="" />
+
+      <div class="detail-info">
+        <h1 id="product-name"></h1>
+
+        <div class="detail-price" id="product-price"></div>
+
+        <h2>Chọn Size</h2>
+
+        <div class="size-box" id="size-box"></div>
+
+        <div class="stock" id="stock-status"></div>
+
+        <div class="buy-form">
+          <input type="text" id="customer-name" placeholder="Tên người nhận" />
+
+          <input type="text" id="customer-phone" placeholder="Số điện thoại" />
+
+          <input type="text" id="customer-address" placeholder="Địa chỉ" />
+
+          <button class="buy-btn" onclick="buyNow()">Thêm Vào Giỏ Hàng</button>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+
+      const name = params.get("name");
+
+      const price = params.get("price");
+
+      const image = params.get("image");
+
+      document.getElementById("product-name").innerText = name;
+
+      document.getElementById("product-price").innerText = price;
+
+      document.getElementById("product-image").src = image;
+
+      const sizeBox = document.getElementById("size-box");
+
+      const stockStatus = document.getElementById("stock-status");
+
+      let selectedSize = "";
+
+      for (let i = 30; i <= 44; i++) {
+        const btn = document.createElement("button");
+
+        btn.innerText = i;
+
+        btn.classList.add("size-btn");
+
+        // SIZE 35 HẾT HÀNG
+        if (i === 35) {
+          btn.classList.add("out");
+
+          btn.disabled = true;
+        } else {
+          btn.onclick = function () {
+            document.querySelectorAll(".size-btn").forEach((b) => {
+              b.classList.remove("active");
+            });
+
+            btn.classList.add("active");
+
+            selectedSize = i;
+
+            stockStatus.innerHTML = "<span class='in-stock'>Còn hàng</span>";
+          };
+        }
+
+        sizeBox.appendChild(btn);
+      }
+
+      stockStatus.innerHTML = "<span class='out-stock'>Size 35 hết hàng</span>";
+
+      function buyNow() {
+        const customerName = document.getElementById("customer-name").value;
+
+        const customerPhone = document.getElementById("customer-phone").value;
+
+        const customerAddress =
+          document.getElementById("customer-address").value;
+
+        if (
+          customerName === "" ||
+          customerPhone === "" ||
+          customerAddress === "" ||
+          selectedSize === ""
+        ) {
+          alert("Vui lòng nhập đầy đủ");
+          return;
+        }
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cart.push({
+          product: name,
+
+          price: price,
+
+          image: image,
+
+          size: selectedSize,
+
+          customerName: customerName,
+
+          customerPhone: customerPhone,
+
+          customerAddress: customerAddress,
+
+          status: "Chờ thanh toán",
+
+          time: new Date().toLocaleString(),
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+
+        alert("Đã thêm vào giỏ hàng");
+
+        window.location.href = "cart.html";
+      }
+    </script>
+  </body>
+</html>

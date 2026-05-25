@@ -1,0 +1,230 @@
+<!-- admin.html -->
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ADMIN PANEL</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <script>
+    const password = prompt("Nhập mật khẩu Admin");
+
+    if (password !== "1") {
+      window.location.href = "index.html";
+    }
+  </script>
+
+  <body>
+    <header>
+      <div class="logo">XIN CHÀO ÔNG CHỦ</div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html">Trang Chủ</a></li>
+
+          <li><a href="cart.html">Giỏ Hàng</a></li>
+
+          <li><a href="orders.html">Đơn Hàng</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="admin-page">
+      <h1>TRANG QUẢN TRỊ</h1>
+
+      <!-- ADD PRODUCT -->
+
+      <div class="admin-box">
+        <h2>Thêm Sản Phẩm</h2>
+
+        <input
+          type="text"
+          id="product-name"
+          placeholder="Tên sản phẩm"
+          class="input-box"
+        />
+
+        <input
+          type="text"
+          id="product-price"
+          placeholder="Giá sản phẩm"
+          class="input-box"
+        />
+
+        <input
+          type="text"
+          id="product-image"
+          placeholder="IMG/tenanh.jpg"
+          class="input-box"
+        />
+
+        <button class="btn" onclick="addProduct()">Thêm Sản Phẩm</button>
+      </div>
+
+      <!-- ORDERS -->
+
+      <div class="admin-box">
+        <h2>Danh Sách Đơn Hàng</h2>
+
+        <div id="cart-list"></div>
+      </div>
+
+      <!-- PRODUCTS -->
+
+      <div class="admin-box">
+        <h2>Quản Lí Sản Phẩm</h2>
+
+        <div id="product-list"></div>
+      </div>
+    </section>
+
+    <script>
+      // CART
+      let cart = JSON.parse(localStorage.getItem("orders")) || [];
+
+      // DOM
+      const cartList = document.getElementById("cart-list");
+
+      // SHOW ORDERS
+      function showOrders() {
+        cartList.innerHTML = "";
+
+        if (cart.length === 0) {
+          cartList.innerHTML = "<p>Chưa có dữ liệu.</p>";
+        } else {
+          cart.forEach((item, index) => {
+            cartList.innerHTML += `
+
+            <div class="cart-box">
+
+              <h2>${item.product}</h2>
+
+              <p><b>Giá:</b> ${item.price}</p>
+
+              <p><b>Người mua:</b> ${item.customerName}</p>
+
+              <p><b>SĐT:</b> ${item.customerPhone}</p>
+
+              <p><b>Địa chỉ:</b> ${item.customerAddress}</p>
+
+              <p><b>Trạng thái:</b> ${item.status}</p>
+
+              <p><b>Thời gian:</b> ${item.time}</p>
+
+              <button
+                class="btn"
+                onclick="deleteItem(${index})">
+
+                Xóa Đơn
+
+              </button>
+
+            </div>
+
+            `;
+          });
+        }
+      }
+
+      // DELETE ORDER
+      function deleteItem(index) {
+        cart.splice(index, 1);
+
+        localStorage.setItem("orders", JSON.stringify(cart));
+
+        showOrders();
+      }
+
+      // ADD PRODUCT
+      function addProduct() {
+        const productName = document.getElementById("product-name").value;
+
+        const productPrice = document.getElementById("product-price").value;
+
+        const productImage = document.getElementById("product-image").value;
+
+        if (productName === "" || productPrice === "" || productImage === "") {
+          alert("Vui lòng nhập đầy đủ");
+
+          return;
+        }
+
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+
+        products.push({
+          name: productName,
+          price: productPrice,
+          image: productImage,
+        });
+
+        localStorage.setItem("products", JSON.stringify(products));
+
+        alert("Đã thêm sản phẩm");
+
+        document.getElementById("product-name").value = "";
+
+        document.getElementById("product-price").value = "";
+
+        document.getElementById("product-image").value = "";
+
+        showProducts();
+      }
+
+      // PRODUCTS
+      let products = JSON.parse(localStorage.getItem("products")) || [];
+
+      const productList = document.getElementById("product-list");
+
+      // SHOW PRODUCTS
+      function showProducts() {
+        productList.innerHTML = "";
+
+        products.forEach((item, index) => {
+          productList.innerHTML += `
+
+          <div class="cart-box">
+
+            <img
+              src="${item.image}"
+              width="150"
+              style="border-radius:10px"
+            >
+
+            <h2>${item.name}</h2>
+
+            <p>${item.price}</p>
+
+            <button
+              class="btn"
+              onclick="deleteProduct(${index})">
+
+              Xóa Sản Phẩm
+
+            </button>
+
+          </div>
+
+          `;
+        });
+      }
+
+      // DELETE PRODUCT
+      function deleteProduct(index) {
+        products.splice(index, 1);
+
+        localStorage.setItem("products", JSON.stringify(products));
+
+        showProducts();
+      }
+
+      showOrders();
+
+      showProducts();
+    </script>
+  </body>
+</html>

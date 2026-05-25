@@ -1,54 +1,223 @@
 <!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>PHAMMINHQUAN</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-<div id="header">
-<div class="logo">
- <h1>ĐỒ CHƠI XE MÁY </h1>
-</div>
-<div class="menu">
-<a href="#"> Trang Chủ</a>
-<a href="#"> Danh mục</a>
-<a href="#"> Sản phẩm</a>
-<a href="#"> Liên hệ</a>
-<a href="#"> Góp ý</a>
-</div>
-</div>
-<div id="main">
-<div id="quan">
-<div class="left">
-<video autoplay controls src="img/7034734565160.mp4" width="1000px" height="500px"></video>
-<div class="right">
- <img src="img/copo.jfif" width="220px" height="150px">
- <h3>Che két nước trong video</h3>
- <img src="img/inox.jfif" width="220px" height="150px">
- <h3>Mâm X1R 5 cây trong video</h3>
- <img src="img/mam.jfif"  width="220px" height="150px">
- <h3>Pô orbr trong video</h3>
- 
-</div>
-<div id="sp">
- <h1>DANH MỤC SẢN PHẨM</h1>
-<div class="row" >
-<div class="column">
- <img src="img/mam2.jfif" width="200px" height="150px">
- <p> mã sỉ lẻ: 101 </p>
- <b>200.000.đ</b>
- <em>Cổ pô inox 304</em>
-</div> <div class="column">
- <img src="img/mam2.jfif" width="200px" height="150px">
- <p> mã sỉ lẻ: 102 </p>
- <b>2.300.000.đ</b>
- <em>Mâm X1R 5 cây</em>
-</div> 
-</div> 
-</div>
-</div> 
-</div>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
 
-</body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SPORT SHOP</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- MENU -->
+
+    <header>
+      <div class="logo">NGON - BỔ - RẺ</div>
+
+      <nav>
+        <ul>
+          <li>
+            <a href="#"> Trang Chủ </a>
+          </li>
+
+          <li>
+            <a href="#"> Giày Thể Thao </a>
+          </li>
+
+          <li>
+            <a href="cart.html"> Giỏ Hàng </a>
+          </li>
+
+          <li>
+            <a href="orders.html"> Theo Dõi Đơn </a>
+          </li>
+
+          <li>
+            <a href="login.html"> Tài Khoản </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- BANNER -->
+
+    <section
+      class="banner"
+      style="
+        width: 100%;
+        height: 100vh;
+        background-image: url(&quot;IMG/anh.jpg&quot;);
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <div
+        class="banner-text"
+        style="
+          text-align: center;
+          color: white;
+          background: rgba(0, 0, 0, 0.5);
+          padding: 40px;
+          border-radius: 20px;
+        "
+      >
+        <h1 style="font-size: 60px; margin-bottom: 20px">
+          GIÀY THỂ THAO CHÍNH HÃNG
+        </h1>
+
+        <p style="font-size: 24px; margin-bottom: 30px">
+          Phong cách - Cá tính - Hiện đại
+        </p>
+
+        <a
+          href="#"
+          class="banner-btn"
+          style="
+            display: inline-block;
+            padding: 15px 35px;
+            background: #ff3c00;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 18px;
+          "
+        >
+          Mua Ngay
+        </a>
+      </div>
+    </section>
+
+    <!-- TITLE -->
+
+    <h2 class="title">SẢN PHẨM NỔI BẬT</h2>
+
+    <!-- PRODUCTS -->
+
+    <section class="product-container">
+      <!-- PRODUCT 1 -->
+
+      <div class="product" data-name="Nike Air Jordan">
+        <img src="IMG/nike air jordan.jpg" alt="Giày" />
+
+        <div class="product-info">
+          <h3>Nike Air Jordan</h3>
+
+          <p class="price">2.500.000đ</p>
+
+          <button class="btn add-cart">Thêm Vào Giỏ</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 2 -->
+
+      <div class="product" data-name="Adidas Ultra Boost">
+        <img src="IMG/Ultra Bosst.jpg" alt="Giày" />
+
+        <div class="product-info">
+          <h3>Adidas Ultra Boost</h3>
+
+          <p class="price">3.200.000đ</p>
+
+          <button class="btn add-cart">Thêm Vào Giỏ</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 3 -->
+
+      <div class="product" data-name="Puma Sport">
+        <img src="IMG/PUMA.jpg" alt="Giày" />
+
+        <div class="product-info">
+          <h3>Puma Sport</h3>
+
+          <p class="price">1.900.000đ</p>
+
+          <button class="btn add-cart">Thêm Vào Giỏ</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 4 -->
+
+      <div class="product" data-name="New Balance">
+        <img src="IMG/Balance.jpg" alt="Giày" />
+
+        <div class="product-info">
+          <h3>New Balance</h3>
+
+          <p class="price">2.700.000đ</p>
+
+          <button class="btn add-cart">Thêm Vào Giỏ</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 5 -->
+
+      <div class="product" data-name="Giày bóng đá Mizuno">
+        <img src="IMG/Mizuno.jpg" alt="Giày" />
+
+        <div class="product-info">
+          <h3>Giày bóng đá Mizuno</h3>
+
+          <p class="price">2.600.000đ</p>
+
+          <button class="btn add-cart">Thêm Vào Giỏ</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 6 -->
+
+      <div class="product" data-name="VAN">
+        <img src="IMG/VAN.jpg" alt="Giày" />
+
+        <div class="product-info">
+          <h3>VAN</h3>
+
+          <p class="price">2.000.000đ</p>
+
+          <button class="btn add-cart">Thêm Vào Giỏ</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 7 -->
+
+      <div class="product" data-name="MC QUEEN">
+        <img src="IMG/MC QUEEN.jpg" alt="Giày" />
+
+        <div class="product-info">
+          <h3>MC QUEEN</h3>
+
+          <p class="price">2.500.000đ</p>
+
+          <button class="btn add-cart">Thêm Vào Giỏ</button>
+        </div>
+      </div>
+
+      <!-- PRODUCT 8 -->
+
+      <div class="product" data-name="NIKE">
+        <img src="IMG/NIKE.jpg" alt="Giày" />
+
+        <div class="product-info">
+          <h3>NIKE</h3>
+
+          <p class="price">3.000.000đ</p>
+
+          <button class="btn add-cart">Thêm Vào Giỏ</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- JS -->
+
+    <script src="main.js"></script>
+
+    <!-- FOOTER -->
+
+    <footer>© 2026 MINHQUAN SHOP | Website bán giày thể thao</footer>
+  </body>
 </html>
